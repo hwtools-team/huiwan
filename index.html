@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SVGA → APNG / WEBP 转换器</title>
+  <script type="module" crossorigin src="./assets/index-Csdqzm9M.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-C4xsNVdO.css">
+</head>
+<body>
+  <div class="app-container">
+    <header class="header">
+      <h1>SVGA 转换器</h1>
+      <p class="subtitle">将 SVGA 动画无损转换为 APNG 和 WEBP 格式</p>
+    </header>
+
+    <main class="main-content">
+      <div id="dropzone" class="dropzone">
+        <div class="dropzone-inner">
+          <div class="drop-icon">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M7 10V9C7 6.23858 9.23858 4 12 4C14.7614 4 17 6.23858 17 9V10C19.2091 10 21 11.7909 21 14C21 15.4806 20.1956 16.8084 19 17.5M7 10C4.79086 10 3 11.7909 3 14C3 15.4806 3.8044 16.8084 5 17.5M7 10C7.43285 10 7.84965 10.0688 8.24006 10.1959M12 12V21M12 12L15 15M12 12L9 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h2 class="drop-title">拖拽 SVGA 文件至此</h2>
+          <p class="drop-desc">支持批量转换，完成后自动下载</p>
+          <button class="select-btn" id="selectBtn">选择文件</button>
+          <input type="file" id="fileInput" accept=".svga" multiple hidden />
+        </div>
+      </div>
+
+      <div id="batchSummary" class="batch-summary hidden">
+        <div class="summary-info">
+          <span class="summary-text" id="summaryText">正在处理: 0 / 0</span>
+          <div class="progress-bar-container">
+            <div class="progress-bar" id="summaryProgress"></div>
+          </div>
+        </div>
+        <button id="downloadAllBtn" class="download-all-btn hidden">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+          全部下载
+        </button>
+      </div>
+
+      <div id="results" class="results-list">
+        <div id="emptyState" class="empty-state">
+          <div class="empty-icon">✨</div>
+          <p>暂无转换任务</p>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <canvas id="renderCanvas" style="display:none;"></canvas>
+  <script src="./svga.min.js"></script>
+</body>
+</html>
