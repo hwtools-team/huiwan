@@ -1,0 +1,135 @@
+.preview-section {
+  margin-top: 24px;
+  border: 1px solid var(--border-color);
+  border-radius: 18px;
+  padding: 20px;
+  background: rgba(20, 20, 20, 0.72);
+}
+
+.preview-section.hidden {
+  display: none;
+}
+
+.preview-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.preview-kicker {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--accent-color);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.preview-heading h2 {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 18px;
+  line-height: 1.3;
+}
+
+.preview-count {
+  flex: none;
+  color: var(--text-secondary);
+  font-size: 12px;
+}
+
+.preview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 14px;
+}
+
+.preview-card {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  background: rgba(10, 10, 10, 0.9);
+}
+
+.preview-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background-color: #161616;
+  background-image:
+    linear-gradient(45deg, rgba(255, 255, 255, 0.035) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(255, 255, 255, 0.035) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, rgba(255, 255, 255, 0.035) 75%),
+    linear-gradient(-45deg, transparent 75%, rgba(255, 255, 255, 0.035) 75%);
+  background-position: 0 0, 0 8px, 8px -8px, -8px 0;
+  background-size: 16px 16px;
+}
+
+.preview-stage canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.preview-loading {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: var(--text-secondary);
+  font-size: 12px;
+  background: rgba(12, 12, 12, 0.72);
+}
+
+.preview-card.is-ready .preview-loading {
+  display: none;
+}
+
+.preview-card.is-error .preview-loading {
+  color: #ff8a8a;
+}
+
+.preview-card-body {
+  padding: 11px 12px 12px;
+}
+
+.preview-name {
+  overflow: hidden;
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 13px;
+  font-weight: 650;
+  line-height: 1.4;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.preview-status {
+  overflow: hidden;
+  margin: 5px 0 0;
+  color: var(--text-secondary);
+  font-size: 11px;
+  line-height: 1.4;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.preview-card.is-error .preview-status {
+  color: #ff8a8a;
+}
+
+@media (max-width: 560px) {
+  .preview-section {
+    padding: 16px;
+  }
+
+  .preview-grid {
+    grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
+  }
+}
