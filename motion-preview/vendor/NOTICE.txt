@@ -1,0 +1,21 @@
+Third-party notices
+===================
+
+SVGAPlayer-SVG 1.0.0
+Source: https://github.com/PonyCui/SVGAPlayer-SVG
+License: ISC, as declared by the upstream package.json.
+Copyright: upstream contributors.
+
+The bundled browser converter is based on the upstream browser build and is
+used locally to transform SVGA 2.x files into animated SVG documents.
+
+Jimp 0.6.3
+Source: https://github.com/jimp-dev/jimp
+License: MIT. The minified bundle also retains its upstream license banner.
+
+libpag 4.5.81
+Source: https://github.com/Tencent/libpag
+License: Apache-2.0 with third-party notices in the upstream LICENSE.txt.
+The pinned official JavaScript and WebAssembly runtime is bundled locally.
+The complete upstream license is included as libpag-LICENSE.txt.
+Selected PAG files remain in the browser and are not uploaded by this tool.
