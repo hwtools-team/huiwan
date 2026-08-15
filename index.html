@@ -1,70 +1,84 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SVGA → APNG / WEBP 转换器</title>
-  <script type="module" crossorigin src="./assets/index-Csdqzm9M.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-C4xsNVdO.css">
-  <link rel="stylesheet" href="./hub.css">
-</head>
-<body>
-  <div class="app-container">
-    <header class="header">
-      <h1>SVGA 转换器</h1>
-      <p class="subtitle">将 SVGA 动画无损转换为 APNG 和 WEBP 格式</p>
-    </header>
-
-    <main class="main-content">
-      <div id="dropzone" class="dropzone">
-        <div class="dropzone-inner">
-          <div class="drop-icon">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M7 10V9C7 6.23858 9.23858 4 12 4C14.7614 4 17 6.23858 17 9V10C19.2091 10 21 11.7909 21 14C21 15.4806 20.1956 16.8084 19 17.5M7 10C4.79086 10 3 11.7909 3 14C3 15.4806 3.8044 16.8084 5 17.5M7 10C7.43285 10 7.84965 10.0688 8.24006 10.1959M12 12V21M12 12L15 15M12 12L9 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <h2 class="drop-title">拖拽 SVGA 文件至此</h2>
-          <p class="drop-desc">支持批量转换，完成后自动下载</p>
-          <button class="select-btn" id="selectBtn">选择文件</button>
-          <input type="file" id="fileInput" accept=".svga" multiple hidden />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="团队常用网页工具入口，所有素材均在使用者自己的浏览器中处理。"
+    />
+    <title>团队工具箱</title>
+    <link rel="stylesheet" href="./hub.css" />
+  </head>
+  <body>
+    <main class="site-shell">
+      <header class="hero">
+        <div class="hero-topline">
+          <span class="brand-mark" aria-hidden="true">T</span>
+          <span class="eyebrow">TEAM TOOLS</span>
         </div>
-      </div>
-
-      <div id="batchSummary" class="batch-summary hidden">
-        <div class="summary-info">
-          <span class="summary-text" id="summaryText">正在处理: 0 / 0</span>
-          <div class="progress-bar-container">
-            <div class="progress-bar" id="summaryProgress"></div>
+        <div class="hero-copy">
+          <div>
+            <h1>团队工具箱</h1>
+            <p>把常用的小工具收在一个地方。选择后直接使用，后续新增工具也会继续放在这里。</p>
+          </div>
+          <div class="privacy-note">
+            <span class="privacy-dot" aria-hidden="true"></span>
+            素材仅在当前浏览器处理
           </div>
         </div>
-        <button id="downloadAllBtn" class="download-all-btn hidden">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-          全部下载
-        </button>
-      </div>
+      </header>
 
-      <div id="results" class="results-list">
-        <div id="emptyState" class="empty-state">
-          <div class="empty-icon">✨</div>
-          <p>暂无转换任务</p>
+      <section class="tools-section" aria-labelledby="toolsTitle">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">AVAILABLE NOW</p>
+            <h2 id="toolsTitle">选择一个工具</h2>
+          </div>
+          <span class="tool-count">2 个工具</span>
         </div>
-      </div>
 
-      <section class="tools-hub" aria-labelledby="toolsHubTitle">
-        <div class="tools-hub-copy">
-          <span class="tools-hub-kicker">团队工具</span>
-          <h2 id="toolsHubTitle">动效批量预览器</h2>
-          <p>批量预览 SVGA、SVG 与 PAG，并将 SVGA 导出为轻量或高保真 SVG。</p>
+        <div class="tool-grid">
+          <a class="tool-card" href="./svga-converter/">
+            <div class="card-topline">
+              <span class="tool-icon tool-icon-convert" aria-hidden="true">C</span>
+              <span class="tool-type">格式转换</span>
+            </div>
+            <div class="card-copy">
+              <h3>SVGA 转换器</h3>
+              <p>将 SVGA 动画批量转换为 APNG 或 WEBP，适合输出通用动图文件。</p>
+            </div>
+            <div class="card-meta" aria-label="支持能力">
+              <span>SVGA</span>
+              <span>APNG</span>
+              <span>WEBP</span>
+            </div>
+            <span class="open-link">打开工具 <span aria-hidden="true">→</span></span>
+          </a>
+
+          <a class="tool-card" href="./motion-preview/">
+            <div class="card-topline">
+              <span class="tool-icon tool-icon-preview" aria-hidden="true">M</span>
+              <span class="tool-type">批量验收</span>
+            </div>
+            <div class="card-copy">
+              <h3>动效批量预览器</h3>
+              <p>批量预览 SVGA、SVG 与 PAG，并将 SVGA 导出为轻量或高保真 SVG。</p>
+            </div>
+            <div class="card-meta" aria-label="支持能力">
+              <span>SVGA</span>
+              <span>SVG</span>
+              <span>PAG</span>
+            </div>
+            <span class="open-link">打开工具 <span aria-hidden="true">→</span></span>
+          </a>
         </div>
-        <a class="tools-hub-link" href="./motion-preview/">
-          打开工具
-          <span aria-hidden="true">→</span>
-        </a>
       </section>
-    </main>
-  </div>
 
-  <canvas id="renderCanvas" style="display:none;"></canvas>
-  <script src="./svga.min.js"></script>
-</body>
+      <footer>
+        <span>TEAM TOOLS · 2026</span>
+        <span>新工具会继续添加到此页面</span>
+      </footer>
+    </main>
+  </body>
 </html>
