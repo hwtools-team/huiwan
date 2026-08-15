@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="本地批量预览 SVGA、SVG 与 PAG 动效，并按需将 SVGA 转换为 SVG。"
+    />
+    <title>动效批量预览器</title>
+    <link rel="stylesheet" href="./app.css" />
+    <link rel="stylesheet" href="./theme-dark.css" />
+  </head>
+  <body>
+    <a class="back-link" href="../" aria-label="返回团队工具首页">
+      <span aria-hidden="true">←</span>
+      团队工具首页
+    </a>
+    <div id="root"></div>
+    <script
+      type="module"
+      data-svga-tool="libpag-4.5.81"
+      src="./vendor/libpag-4.5.81.min.js"
+    ></script>
+    <script src="./app.js"></script>
+  </body>
+</html>
