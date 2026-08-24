@@ -242,6 +242,12 @@ a {
   box-shadow: 0 7px 20px rgba(91, 117, 216, 0.24);
 }
 
+.tool-icon-gift {
+  color: #d8fbff;
+  background: linear-gradient(135deg, #4cbfd1, #4e6ed5);
+  box-shadow: 0 7px 20px rgba(76, 191, 209, 0.22);
+}
+
 .tool-type {
   color: var(--muted);
   font-size: 11px;
