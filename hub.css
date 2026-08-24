@@ -161,7 +161,7 @@ a {
 
 .tool-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 18px;
 }
 
@@ -234,6 +234,12 @@ a {
   color: #ffffff;
   background: linear-gradient(135deg, #4f8cff, #315fcb);
   box-shadow: 0 7px 20px rgba(79, 140, 255, 0.22);
+}
+
+.tool-icon-title {
+  color: #e9f1ff;
+  background: linear-gradient(135deg, #6f91f5, #4d63bc);
+  box-shadow: 0 7px 20px rgba(91, 117, 216, 0.24);
 }
 
 .tool-type {
@@ -310,6 +316,12 @@ footer {
   color: #666;
   font-size: 10px;
   letter-spacing: 0.08em;
+}
+
+@media (max-width: 980px) {
+  .tool-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 760px) {
