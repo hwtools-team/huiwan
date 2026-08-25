@@ -2,6 +2,8 @@
 
 纯浏览器本地处理的道具动效工作台。批量导入文件后，可调整尺寸、缩放、帧率、时长、质量、Alpha 边缘柔化和静音，并输出为 WebP、APNG、GIF、MP4、VAP、双通道 MP4、SVGA 或 PNG 序列 ZIP。
 
+> 请通过 <https://hwtools-team.github.io/huiwan/gift-processor-beta/> 使用。不要双击本地 `index.html`；`file://` 页面无法正常加载 ES Module、Web Worker 和 WebAssembly。
+
 ## 支持输入
 
 - SVGA 2.x

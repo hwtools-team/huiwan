@@ -157,6 +157,23 @@
     <script src="./vendor/svga.min.js"></script>
     <script src="./vendor/vap.min.js"></script>
     <script src="./vendor/jszip.min.js"></script>
-    <script type="module" src="./app.js?v=20260825-pngseq-final"></script>
+    <script>
+      if (window.location.protocol === "file:") {
+        document.body.innerHTML = `
+          <main class="local-file-notice">
+            <div class="local-file-notice__icon" aria-hidden="true">!</div>
+            <p class="eyebrow">OPEN THE PUBLISHED TOOL</p>
+            <h1>请使用线上测试版</h1>
+            <p>当前页面是通过 <code>file://</code> 直接打开的本地 HTML。浏览器会阻止这种页面加载模块、Worker 和 WebAssembly，因此文件选择后不会处理。</p>
+            <a class="button button-primary" href="https://hwtools-team.github.io/huiwan/gift-processor-beta/">打开道具动效处理台</a>
+            <small>团队成员都应使用这个 HTTPS 地址，不要双击本地 index.html。</small>
+          </main>`;
+      } else {
+        const moduleScript = document.createElement("script");
+        moduleScript.type = "module";
+        moduleScript.src = "./app.js?v=20260825-pngseq-final";
+        document.body.appendChild(moduleScript);
+      }
+    </script>
   </body>
 </html>

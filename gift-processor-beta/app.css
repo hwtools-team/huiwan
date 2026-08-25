@@ -171,6 +171,14 @@ footer { display: flex; justify-content: space-between; gap: 14px; margin-top: 2
 .toast.error { border-color: rgba(255,117,139,.34); color: #ffd5dc; background: rgba(45,20,28,.97); }
 .toast.success { border-color: rgba(70,214,151,.3); color: #d5f7e8; background: rgba(14,39,31,.97); }
 
+.local-file-notice { width: min(620px, calc(100% - 28px)); margin: 12vh auto 0; border: 1px solid var(--border); border-radius: var(--radius-xl); padding: clamp(28px, 6vw, 52px); background: linear-gradient(150deg, rgba(20,24,33,.98), rgba(11,14,20,.98)); box-shadow: var(--shadow); text-align: center; }
+.local-file-notice__icon { display: grid; width: 58px; height: 58px; place-items: center; margin: 0 auto 22px; border-radius: 18px; color: #1c1304; background: var(--warning); font-size: 28px; font-weight: 900; }
+.local-file-notice h1 { margin: 9px 0 14px; font-size: clamp(30px, 6vw, 46px); letter-spacing: -.045em; }
+.local-file-notice > p:not(.eyebrow) { margin: 0 auto; color: var(--muted); font-size: 13px; line-height: 1.8; }
+.local-file-notice code { color: #c8d5ff; }
+.local-file-notice .button { width: 100%; margin-top: 28px; }
+.local-file-notice small { display: block; margin-top: 16px; color: #687385; font-size: 9px; line-height: 1.6; }
+
 @media (max-width: 1080px) {
   .workbench { grid-template-columns: 1fr; }
   .settings-panel { position: static; }
