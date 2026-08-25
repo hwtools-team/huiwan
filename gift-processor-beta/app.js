@@ -1,5 +1,5 @@
-import { processMediaItem, terminateFfmpeg } from "./ffmpeg-engine.js";
-import { mountSvgaPreview, parseSvgaFile } from "./svga-codec.js";
+import { processMediaItem, terminateFfmpeg } from "./ffmpeg-engine.js?v=20260825-pngseq";
+import { mountSvgaPreview, parseSvgaFile } from "./svga-codec.js?v=20260825-pngseq";
 import { extractVapConfig, vapDisplayMetadata } from "./vap-codec.js";
 import { parseAnimatedImageMetadata } from "./image-codec.js";
 
@@ -53,6 +53,7 @@ const FORMAT_NOTES = {
   vap: "生成 H.264 RGB+Alpha 并在 MP4 写入腾讯 VAP v2 vapc 配置。测试版须在业务端播放器复验。",
   dual: "生成左侧 RGB、右侧 Alpha 的双通道 H.264 MP4，不写入 VAP 配置。",
   svga: "采用逐帧 SVGA 2.0 兼容结构，视觉稳定但可能较大；测试版最多 300 帧且不携带音频。",
+  pngseq: "只支持 SVGA：按原始画布、原始帧率和全部帧渲染透明 RGBA PNG，以 000.png开始连续命名并打包 ZIP。",
 };
 
 function escapeHtml(value) {
@@ -372,11 +373,25 @@ async function addFiles(files) {
 }
 
 function currentSettings() {
+  const outputFormat = elements.outputFormat.value;
+  if (outputFormat === "pngseq") {
+    return {
+      outputFormat,
+      width: 0,
+      height: 0,
+      scaleMode: "contain",
+      fps: 0,
+      duration: 0,
+      quality: 100,
+      edgeBlur: 0,
+      mute: true,
+    };
+  }
   const width = Number(elements.targetWidth.value) || 0;
   const height = Number(elements.targetHeight.value) || 0;
   if ((width && !height) || (!width && height)) throw new Error("目标宽度和高度必须同时填写");
   return {
-    outputFormat: elements.outputFormat.value,
+    outputFormat,
     width,
     height,
     scaleMode: elements.scaleMode.value,
@@ -389,7 +404,8 @@ function currentSettings() {
 }
 
 function outputFilename(item, extension) {
-  const suffix = currentSettings().outputFormat === "vap" ? "-vap" : currentSettings().outputFormat === "dual" ? "-dual" : "-processed";
+  const format = currentSettings().outputFormat;
+  const suffix = format === "vap" ? "-vap" : format === "dual" ? "-dual" : format === "pngseq" ? "-png-sequence" : "-processed";
   return `${stem(item.file.name)}${suffix}.${extension}`;
 }
 
@@ -488,9 +504,22 @@ function resetSettings() {
 }
 
 function updateSettingsUI() {
+  const pngSequenceMode = elements.outputFormat.value === "pngseq";
   elements.qualityOutput.textContent = elements.quality.value;
   elements.blurOutput.textContent = elements.edgeBlur.value;
   elements.formatNote.textContent = FORMAT_NOTES[elements.outputFormat.value];
+  [
+    elements.targetWidth,
+    elements.targetHeight,
+    elements.scaleMode,
+    elements.targetFps,
+    elements.targetDuration,
+    elements.quality,
+    elements.edgeBlur,
+    elements.muteAudio,
+  ].forEach((control) => {
+    control.disabled = pngSequenceMode;
+  });
 }
 
 function openHistoryDb() {

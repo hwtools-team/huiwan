@@ -71,6 +71,7 @@
               <option value="vap">VAP MP4（RGB + Alpha + vapc）</option>
               <option value="dual">双通道 MP4（RGB + Alpha）</option>
               <option value="svga">SVGA 2.0（逐帧兼容）</option>
+              <option value="pngseq">PNG 序列（ZIP）</option>
             </select>
           </label>
 
@@ -142,6 +143,7 @@
           <p><strong>VAP：</strong>按腾讯 VAP v2 公开规范生成 RGB+Alpha 并写入 <code>vapc</code>；正式上线前必须在业务端 VAP 播放器实机复验。</p>
           <p><strong>SVGA：</strong>非 SVGA 转出时采用逐帧兼容结构，视觉更稳定，但文件可能明显变大，最多 300 帧。</p>
           <p><strong>GIF：</strong>只有 256 色，半透明边缘会有损失；透明道具优先使用 WebP/APNG/VAP。</p>
+          <p><strong>PNG 序列：</strong>保留透明 RGBA，以 <code>000.png</code> 开始连续命名并打包 ZIP；帧数受目标时长与帧率影响。</p>
         </div>
       </section>
 
@@ -154,6 +156,7 @@
     <script src="./vendor/protobuf.min.js"></script>
     <script src="./vendor/svga.min.js"></script>
     <script src="./vendor/vap.min.js"></script>
-    <script type="module" src="./app.js"></script>
+    <script src="./vendor/jszip.min.js"></script>
+    <script type="module" src="./app.js?v=20260825-pngseq-final"></script>
   </body>
 </html>

@@ -2,7 +2,7 @@ import { FFmpeg } from "./vendor/ffmpeg/index.js";
 import {
   encodeSvgaFromFrames,
   renderSvgaFrames,
-} from "./svga-codec.js";
+} from "./svga-codec.js?v=20260825-pngseq";
 import { appendVapConfig, buildVapConfig } from "./vap-codec.js";
 import { renderAnimatedImageFrames } from "./image-codec.js";
 
@@ -39,6 +39,7 @@ function outputExtension(format) {
     vap: "mp4",
     dual: "mp4",
     svga: "svga",
+    pngseq: "zip",
   }[format];
 }
 
@@ -51,6 +52,7 @@ function outputMime(format) {
     vap: "video/mp4",
     dual: "video/mp4",
     svga: "application/octet-stream",
+    pngseq: "application/zip",
   }[format];
 }
 
@@ -243,6 +245,29 @@ async function extractProcessedFrames({
   return { ...base, frames, duration: frames.length / base.fps };
 }
 
+function safeFolderName(name) {
+  return String(name || "gift-motion")
+    .replace(/\.[^.]+$/, "")
+    .replace(/[^\p{L}\p{N}._-]+/gu, "-")
+    .replace(/^-+|-+$/g, "") || "gift-motion";
+}
+
+async function encodePngSequenceZip(processed, sourceName, onProgress) {
+  if (!window.JSZip) throw new Error("PNG 序列 ZIP 引擎未加载");
+  const zip = new window.JSZip();
+  const folder = zip.folder(`${safeFolderName(sourceName)}-png-sequence`);
+  processed.frames.forEach((frame, index) => {
+    folder.file(`${String(index).padStart(3, "0")}.png`, frame, {
+      binary: true,
+      compression: "STORE",
+    });
+  });
+  return zip.generateAsync(
+    { type: "blob", mimeType: "application/zip", compression: "STORE" },
+    ({ percent }) => onProgress(0.72 + (percent / 100) * 0.28),
+  );
+}
+
 function qualityToCrf(quality) {
   const normalized = Math.max(1, Math.min(100, Number(quality) || 80));
   return Math.round(40 - normalized * 0.3);
@@ -400,6 +425,32 @@ export async function processMediaItem(
     onLog = () => {},
   } = {},
 ) {
+  if (settings.outputFormat === "pngseq") {
+    if (item.kind !== "svga" || !item.video) {
+      throw new Error("PNG 序列导出目前只支持 SVGA 文件");
+    }
+    onStatus("正在按 SVGA 原始帧率渲染 PNG…");
+    const rendered = await renderSvgaFrames(
+      item.video,
+      { fps: item.metadata.fps, duration: item.metadata.duration },
+      (progress) => onProgress(progress * 0.72),
+    );
+    onStatus("正在打包 PNG 序列 ZIP…");
+    const blob = await encodePngSequenceZip(rendered, item.file.name, onProgress);
+    onProgress(1);
+    return {
+      blob,
+      width: rendered.width,
+      height: rendered.height,
+      displayWidth: rendered.width,
+      displayHeight: rendered.height,
+      fps: rendered.fps,
+      duration: rendered.duration,
+      extension: outputExtension("pngseq"),
+      mime: outputMime("pngseq"),
+    };
+  }
+
   await ensureFfmpegLoaded({ onStatus });
   currentLogHandler = onLog;
   currentProgressHandler = onProgress;

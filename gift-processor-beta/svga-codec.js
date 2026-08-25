@@ -223,6 +223,7 @@ export async function renderSvgaFrames(video, options = {}, onProgress = () => {
         video.frames - 1,
         Math.floor(time * sourceFps),
       );
+      player.currentFrame = sourceFrame;
       player.drawFrame(sourceFrame);
       frames.push(await canvasToPng(canvas));
       onProgress((index + 1) / totalFrames);
