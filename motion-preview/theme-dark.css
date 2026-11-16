@@ -250,3 +250,20 @@ body {
     left: 13px;
   }
 }
+.card-footer {
+  flex-wrap: wrap;
+}
+
+.card-actions {
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.export-summary {
+  margin: 9px 0 0;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
